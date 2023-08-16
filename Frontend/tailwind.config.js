@@ -9,12 +9,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'principal': '#32BB8D',
+        'cor1': '#0ec0c1',
+        'cor2': '#210123',
+        'primary': '#0ec0c1',
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'back': "url('../../public/blob-scene-bg.png')",
+
       },
     },
   },
