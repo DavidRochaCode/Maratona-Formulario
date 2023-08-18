@@ -17,6 +17,18 @@ export const sendEmail = async (cpf) => {
   }
 };
 
+//função para buscar time
+
+export const temExist = async(id)=>{
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/team/get/${id}`
+    );
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 // Função para obter a quantidade de participantes em uma equipe
 export const getTeamParticipantsCount = async (equipeId) => {
@@ -30,17 +42,52 @@ export const getTeamParticipantsCount = async (equipeId) => {
   }
 };
 
-// Função cadastrar que utiliza a função getTeamParticipantsCount
-export const cadastrar = async (data, exibirModal) => {
 
-  //Algo para idicar que esta validadno os dados aqui...
-
+// Função para obter participante
+export const getUser = async (cpfOrEmail) => {
   try {
+    const response = await axios.get(
+      `http://localhost:3001/user/get/${cpfOrEmail}`
+    );
+    return response.data
+  } catch (error) {
+    console.log(error)
+    return null;
+  }
+};
+
+// Função cadastrar que utiliza a função getTeamParticipantsCount
+export const cadastrar = async (data) => {
+  try {
+
+    // Verificar se o usuário já está cadastrado
+   const userCpf = await getUser(data.cpf);
+   const userEmail = await getUser(data.email);
+   if (userCpf) {
+     return ; // Sai da função se o usuário com o seu cpf já estiver cadastrado
+   }
+
+   if (userEmail) {
+    return ; // Sai da função se o usuário com o seu email já estiver cadastrado
+  }
+
+   const team = await temExist(data.equipeId)
+   if(!team){
+     // Cadastrar Equipe
+     const equipe = await axios.post("http://localhost:3001/team/create", {
+      id: data.equipeId,
+      nomeEquipe: data.nomeTeam
+    });
+    console.log("Equipe Cadastrada: " + equipe.data);
+   }
+  
     // Verificar se o grupo está cheio
     const participantsCount = await getTeamParticipantsCount(data.equipeId);
-    if (participantsCount === 3) {
+    if (data.equipeId != 0 && participantsCount === 3) {
       return; // Sai da função se o grupo estiver cheio
     }
+
+
     // Cadastro de Participante
     const cadastrarUsuario = await axios.post(
       "http://localhost:3001/user/create",
@@ -57,19 +104,20 @@ export const cadastrar = async (data, exibirModal) => {
     );
     console.log("Usuário cadastrado com sucesso:", cadastrarUsuario.data);
 
-    await sendEmail(data.cpf)
-    
+    await sendEmail(data.cpf);
     console.log("Email enviado:");
+
     return cadastrarUsuario.data;
   } catch (error) {
     console.log(error);
+    throw new Error("Erro ao cadastrar participante.");
   }
 };
 
-
-const ReviewForm = ({ data }) => {
+const ReviewForm = ({ data}) => {
   return (
-    <div className="review_form">
+    <div>
+        <div className="review_form">
       <h2>Informações do participante </h2>
       <p>
         <label>Nome:</label> {data.nome}
@@ -108,6 +156,8 @@ const ReviewForm = ({ data }) => {
         </>
       )}
     </div>
+    </div>
+    
   );
 };
 

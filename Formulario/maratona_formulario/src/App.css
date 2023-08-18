@@ -2,6 +2,32 @@
     padding:2rem ;
 }
 
+.inconesContainer{
+  display: flex;
+  margin-bottom: 10px;
+  background-color: #2d012f;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.inconesContainer label{
+  font-weight: normal;
+  letter-spacing: .5px;
+}
+
+.inconesContainer svg{
+  fill: #0ec0c1;
+  font-size: 1.6rem;
+}
+
+.inconesContainer .incones{
+ margin-right: 10px;
+}
+
+.etapas{
+  margin-bottom: 25px;
+}
+
 
 /*Cabeçalho*/
 .header{
@@ -11,7 +37,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 .header h2{
@@ -120,6 +145,7 @@ label{
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+    margin-top: 24px;
 }
 
 .actions button{
@@ -200,6 +226,15 @@ label{
   .review_form{
     max-width: 400px;
     margin: 0 auto;
+    background-color:#963156;
+    padding: 0.8rem;
+    border: 1px solid #e3fafabd;
+    border-radius: 10px;
+  }
+
+  .review_form_groupe{
+    max-width: 400px;
+    margin-top: 10px;
     background-color:#963156;
     padding: 0.8rem;
     border: 1px solid #e3fafabd;
@@ -402,6 +437,53 @@ label{
 }
 
 }
+
+.form_control .equipeNome{
+  width: 290px;
+  font-size: 16px;
+}
+
+.cadastrarEquipe .form_control {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.cadastrarEquipe .form_control .button {
+  width: 100px;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #0ec0c1;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+ 
+}
+.cadastrarEquipe .form_control .button span{
+  color: #210123;
+  font-weight: bold;
+}
+
+.matricula{
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #0ec0c1;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+  border-radius: 10px;
+  color: #210123;
+  font-weight: bold;
+}
+
 
 
   

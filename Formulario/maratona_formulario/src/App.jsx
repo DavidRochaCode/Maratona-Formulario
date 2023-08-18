@@ -6,21 +6,35 @@ import "./App.css";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { FiSend } from "react-icons/fi";
 import TeamForm from "./componentes/TeamForm";
+import CursoForm from "./componentes/CursoForm";
 import UserForm from "./componentes/UserForm";
 import ReviewForm from "./componentes/ReviewForm";
+import Information from "./componentes/information";
 import Steps from "./componentes/Steps";
 import Modal from "./componentes/Modal";
 //HOOKS
 import { useForm } from "./hooks/useForm";
 import { useState } from "react";
+
+
 //AxiosFunctions
 import { cadastrar } from "../src/componentes/ReviewForm";
 import { getTeamParticipantsCount } from "./componentes/ReviewForm";
-
-
-
+import axios from "axios";
 
 function App() {
+
+   const getUser = async (cpfOrEmail) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/user/get/${cpfOrEmail}`
+      );
+  
+     return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +50,7 @@ function App() {
     faculdade: "",
     curso: "",
     periodo: "",
+    cursoProgramacao: "",
   };
 
   const formTeamTemplate = {
@@ -67,6 +82,8 @@ function App() {
   };
 
   const formComponents = [
+    <Information/>,
+    <CursoForm/>,
     <TeamForm
       data={dataTeam}
       updateFieldHandler={updateFieldHandler}
@@ -186,17 +203,18 @@ function App() {
                   setIsLoading(true)
                   const userData = await cadastrar(data);
                   const participantsCount = await getTeamParticipantsCount(data.equipeId);
+                  const userCpf = await getUser(data.cpf)
+                  const userEmail = await getUser(data.email)
                   
                   setIsLoading(false)
-
                   if (userData != undefined) {
                     setIsModalVisible(true);
                     setModalType("success");
                   } else if(participantsCount===3) {
                     setIsModalVisible(true);
                     setModalType("listaCheia")
-                  }else{
-                    console.log("Ocorreu um erro");
+                  }else if(userCpf || userEmail){
+                    console.log("Usuário já existe");
                     setIsModalVisible(true);
                     setModalType("error");
                   }
