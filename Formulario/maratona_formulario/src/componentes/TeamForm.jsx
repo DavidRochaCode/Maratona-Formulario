@@ -16,7 +16,7 @@ const getTeams = async () => {
   }
 };
 
-const time = await getTeams()
+//const time = await getTeams() --> descomentar depois de fazer deploy do backend
 
 const TeamForm = ({
   data,
@@ -207,7 +207,7 @@ const TeamForm = ({
         {data.nomeTeam && !desejaSeguirInscricaoSozinho ? (
           <>
             <p>Essa equipe possui {participantsCount} participante(s):</p>
-              {participants && participants.map(participant => (
+              {participants && participants.map(  participant => (
                 <p key={participant.cpf}>
                  - {participant.nome}
                 </p>
