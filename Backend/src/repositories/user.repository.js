@@ -34,3 +34,15 @@ export const getAllById = async (equipeId) => {
     });
     return users;
   };
+
+  export const getUser = async(identifier) =>{
+    const user = await prisma.usuario.findFirst({
+      where: {
+        OR: [
+          { cpf: identifier },
+          { email: identifier }
+        ]
+      }
+    });
+    return user;
+  }

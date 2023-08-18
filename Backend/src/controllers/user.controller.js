@@ -1,5 +1,5 @@
 import e from "express"
-import{createUser, deleteAllUsers, getAllById, getEmails} from "../repositories/user.repository"
+import{createUser, deleteAllUsers, getAllById, getEmails, getUser} from "../repositories/user.repository"
 import { prisma } from "../services/prisma"
 import {userValidation} from "../validations/user.validation"
 
@@ -51,5 +51,17 @@ export const getAllEmails = async(req,res) =>{
     } catch (e) {
         res.status(400).send(e)
         console.log(e)
+    }
+}
+
+
+export const getUserById = async (req, res) => {
+    try {
+        const identifier = req.params.identifier; // Altere o nome do parâmetro para "identifier"
+        const userGet = await getUser(identifier); // Use o parâmetro "identifier" na chamada da função
+        res.status(200).send(userGet);
+    } catch (error) {
+        res.status(400).send(error);
+        console.log(error);
     }
 }

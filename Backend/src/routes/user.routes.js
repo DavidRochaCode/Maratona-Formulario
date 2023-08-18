@@ -1,4 +1,4 @@
-import{create, get,getId, remove, removeAll, getAllById, getAllEmails, } from "../controllers/user.controller"
+import{create, removeAll, getAllById, getUserById } from "../controllers/user.controller"
 
 
 const userRoutes = app =>{
@@ -11,6 +11,9 @@ const userRoutes = app =>{
     //Listar todos os usuários que possuem o mesmo id da equipe
     app.get("/user/get/allbyid/:equipeId", getAllById)
 
-}
+    //Lista o usuario por id
+    app.get("/user/get/:identifier", getUserById)
+
+}   
  export default userRoutes
 

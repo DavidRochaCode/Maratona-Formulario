@@ -1,4 +1,4 @@
-import{createTeam, deleteTeam, getTeam, getTeamLength} from "../repositories/team.repository"
+import{createTeam, deleteTeam, getTeam, getTeamLength, getTeams, getTeamParticipants} from "../repositories/team.repository"
 import {teamValidation} from "../validations/team.validation"
 
 
@@ -27,6 +27,17 @@ export const get = async(req, res) =>{
     }
 }
 
+//Buscar Times
+
+export const getAll = async(req, res) =>{
+    try {
+        const teams = await getTeams()
+        res.status(200).send(teams)
+    } catch (error) {
+        res.status(400).send(error)
+        console.log(error)
+    }
+}
 
 //Buscar quantidade de participantes em um time 
 
@@ -39,6 +50,19 @@ export const getTeamLength = async(req,res) =>{
         console.log(error)
     }
 }
+
+//Buscar os participantes de uma equipe
+
+export const getTeamMembers = async(req,res) =>{
+    try {
+        const getTeamMembers = await getTeamParticipants(Number(req.params.id))
+        res.status(200).send(getTeamMembers)
+    } catch (error) {
+        res.status(400).send(error)
+        console.log(error)
+    }
+}
+
 
 
 //Deletar time

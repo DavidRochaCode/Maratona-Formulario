@@ -13,14 +13,11 @@ model Usuario{
   nome String
   email String @unique
   celular String 
-  //participarCurso Boolean 
-  //cursoNome String?
   equipeId Int  
   equipe Equipe @relation(fields: [equipeId], references: [id])
   faculdadeNome String
   cursoFaculdade String
-  periodoFaculdade Int
-  
+  periodoFaculdade Int 
 }
 
 model Equipe{
@@ -28,5 +25,13 @@ model Equipe{
   nomeEquipe String
   usuarios Usuario[]
   dataCriacao DateTime @default(now())
+}
+
+model Curso{
+  id Int @id @default(autoincrement())
+  participanteNome String
+  participanteEmail String
+  participanteCelular String
+  cursoEscollhido String
 }
 
