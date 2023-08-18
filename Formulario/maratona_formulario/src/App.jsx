@@ -9,6 +9,7 @@ import TeamForm from "./componentes/TeamForm";
 import CursoForm from "./componentes/CursoForm";
 import UserForm from "./componentes/UserForm";
 import ReviewForm from "./componentes/ReviewForm";
+import Countdown from "./componentes/Countdown";
 
 import Steps from "./componentes/Steps";
 import Modal from "./componentes/Modal";
@@ -109,7 +110,7 @@ function App() {
       ):(
         <>
         <h2>Formulário de Inscrição</h2>
-        <p className="typeMaraton">Maratona de Programação - 2023</p>
+        <Countdown/>
         </>
       )
       }
