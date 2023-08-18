@@ -1,6 +1,6 @@
 import { AiOutlineUser, AiOutlineCode, AiOutlineTeam } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
-const Information = () => {
+const InicialInformation = () => {
   return (
     <div>
       <div className="review_form">
@@ -36,4 +36,4 @@ const Information = () => {
   );
 };
 
-export default Information;
+export default InicialInformation;

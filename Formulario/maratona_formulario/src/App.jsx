@@ -9,7 +9,7 @@ import TeamForm from "./componentes/TeamForm";
 import CursoForm from "./componentes/CursoForm";
 import UserForm from "./componentes/UserForm";
 import ReviewForm from "./componentes/ReviewForm";
-import Information from "./componentes/information";
+
 import Steps from "./componentes/Steps";
 import Modal from "./componentes/Modal";
 //HOOKS
@@ -21,6 +21,7 @@ import { useState } from "react";
 import { cadastrar } from "../src/componentes/ReviewForm";
 import { getTeamParticipantsCount } from "./componentes/ReviewForm";
 import axios from "axios";
+import InicialInformation from "./componentes/InicialInformation";
 
 function App() {
 
@@ -82,7 +83,7 @@ function App() {
   };
 
   const formComponents = [
-    <Information/>,
+    <InicialInformation/>,
     <CursoForm/>,
     <TeamForm
       data={dataTeam}
