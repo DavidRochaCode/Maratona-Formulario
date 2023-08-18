@@ -138,14 +138,10 @@ const ReviewForm = ({ data}) => {
         <label>Período da Faculdade:</label>
         {data.periodo}
       </p>
-      {data.nomeTeam != "undefined" ? (
+      {data.nomeTeam != "Sem Equipe" ? (
         <>
           <p>
             <label>Nome da Equipe:</label> {data.nomeTeam}
-          </p>
-
-          <p>
-            <label>Id da equipe:</label> {data.equipeId}
           </p>
         </>
       ) : (

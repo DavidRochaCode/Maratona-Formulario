@@ -123,6 +123,7 @@
 
 .form_control .check{
   padding-left: 10px;
+  display: flex;
 }
 
 
@@ -466,7 +467,11 @@ label{
 
 }
 
-@media screen and (max-width: 405px) {
+@media screen and (max-width: 420px) {
+
+  .header{
+    margin-bottom: auto;
+  }
 
   .countdown .value{
     width: 50px;
