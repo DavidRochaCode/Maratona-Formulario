@@ -18,7 +18,7 @@ const InicialInformation = () => {
           <div className="incones">
             <AiOutlineTeam />
           </div>
-          <label htmlFor="">Nesta etapa, você pode se inscrever na maratona. Se você é o representante da equipe, crie um novo time especificando o nome. Se não for o representante, selecione sua equipe da lista e continue. Se estiver sem equipe, escolha a opção "Desejo seguir a inscrição sem equipe" . </label>
+          <label htmlFor="">Nesta etapa, você pode se inscrever na maratona. Se você é o representante da equipe, crie um novo time especificando o nome. Se não for o representante, selecione sua equipe da lista e continue. Se você estiver sem equipe, escolha a opção "Desejo seguir a inscrição sem equipe" . </label>
         </div >
         <div className='inconesContainer'>
           <div className="incones">
