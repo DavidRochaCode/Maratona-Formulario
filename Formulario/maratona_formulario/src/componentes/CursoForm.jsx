@@ -8,9 +8,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 
-const matricular = async (info, limparCampos, sucesso, erro)=>{
+const matricular = async (info, sucesso, erro,isEnptyField, verifyEmail, invalidEmail, emptyFields)=>{
      try {
-        await axios.post(
+      
+      if(isEnptyField()){
+        return emptyFields()
+       }
+     if(verifyEmail()){
+      return invalidEmail()
+     }
+
+    
+       const curso = await axios.post(
             "http://localhost:3001/course/create",
             {
               participanteNome: info.nome,
@@ -18,16 +27,18 @@ const matricular = async (info, limparCampos, sucesso, erro)=>{
               participanteCelular: info.celular,
               cursoEscollhido: info.curso,
             }
+            
           );
           sucesso()
+          return curso
           
         } catch (error) {
           console.log("Algo deu errado: " + error)
           erro()
           
         } 
+
         
-        //limparCampos()
 }
 
 
@@ -58,7 +69,9 @@ const CursoForm = () => {
   }
 
   const sucesso = () => toast.success("Matriculado no curso com sucesso!");
-  const erro = () => toast.error("Preencha todos os campos para seguir com a matrícula");
+  const erro = () => toast.error("Algo deu errado");
+  const invalidEmail = () => toast.error("Por favor, digite um email válido");
+  const emptyFields = () => toast.error("Preencha todos os campos");
 
 
   function limparCampos(){
@@ -67,7 +80,20 @@ const CursoForm = () => {
     setCelular("")
     setSelectedCursos([])
   }
+  
+  function isEnptyField(){
+    if(nome == "" || email == "" || celular == "" || selectedCursos == ""){
+      return true
+    }
+  }
+
+  function verifyEmail(){
+    const rgEXP = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2,6}$/
+    if(!rgEXP.test(email)){
+      return true
       
+    }
+  }
 
   return (
  
@@ -133,7 +159,9 @@ const CursoForm = () => {
       </div>
 
       <button type="button" className="matricula" onClick={async function(){
-        await matricular(data, limparCampos(), sucesso, erro)
+
+        await matricular(data, sucesso, erro, isEnptyField, verifyEmail, invalidEmail, emptyFields)
+        limparCampos()
       }}>Matricular-se</button>
       <ToastContainer />
       <div className="review_form_groupe">
