@@ -10,7 +10,7 @@ import CursoForm from "./componentes/CursoForm";
 import UserForm from "./componentes/UserForm";
 import ReviewForm from "./componentes/ReviewForm";
 import Countdown from "./componentes/Countdown";
-
+import {AiFillGithub} from 'react-icons/ai'
 import Steps from "./componentes/Steps";
 import Modal from "./componentes/Modal";
 //HOOKS
@@ -100,6 +100,12 @@ function App() {
 
   return (
     <div className="app">
+      <div className="footer">
+        <div className="footer-contend">
+            <AiFillGithub/>
+          <a href="https://github.com/DavidRochaCode">by David Rocha</a>
+        </div>
+      </div>
       <div className="header">
          {isLoading ? (
         <div className="loader-container">

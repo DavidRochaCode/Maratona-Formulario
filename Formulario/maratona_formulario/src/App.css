@@ -69,6 +69,27 @@
     color: #f2bcd0
 }
 
+.footer{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .footer-contend{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.footer-contend svg{
+  font-size: 20px;
+}
+
+.footer-contend a {
+  text-decoration: none;
+}
+
 /*Formulários*/
 
 .form_container{
