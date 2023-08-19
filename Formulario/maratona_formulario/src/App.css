@@ -2,6 +2,9 @@
     padding:2rem ;
 }
 
+.loader-container p{
+  color: #000000e9;
+}
 .inconesContainer{
   display: flex;
   margin-bottom: 10px;
@@ -349,6 +352,7 @@ label{
   text-align: left;
   margin-top: 20px;
   font-size: 16px;
+  color:  rgba(10, 1, 11, 0.9);
 }
 
 .countdown .content {
