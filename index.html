@@ -1,20 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const imagePath = '../assets/logo.png';
-
-// Conversão do caminho absoluto para relativo
-const imageRelativePath = path.resolve(__dirname, imagePath);
-
-// Leitura da imagem como bytes
-const imageBytes = fs.readFileSync(imageRelativePath);
-
-// Conversão para base64
-const base64Image = imageBytes.toString('base64');
-
-const html = function(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe ){
-    return `
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html>
     
     <head>
@@ -50,7 +34,7 @@ const html = function(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculd
     
     <body>
         <div style="text-align: center;">
-        <img src="data:image/png;base64,${base64Image}" style="width: 200px; height: auto;" alt="Descrição da imagem">
+        <img src="./Logo Site Sem fundo_20230815_104321_0000.png" style="width: 200px; height: auto;" alt="Descrição da imagem">
             <h1>Maratona de Programação</h1>
             <h2 >Confirmação de Inscrição</h2>
         </div>
@@ -113,7 +97,4 @@ const html = function(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculd
     </body>
     
     </html>
-    `
-}
-
-module.exports = html
+    
