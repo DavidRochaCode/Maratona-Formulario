@@ -1,6 +1,8 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const QRCode = require('qrcode');
+const fs = require('fs');
+const path = require('path');
 
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
     // Crie um novo documento PDF
