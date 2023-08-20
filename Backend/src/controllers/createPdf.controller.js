@@ -69,22 +69,31 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
 
     // Defina as informações sobre a maratona
     const maratonaData = `
-    - Data da Maratona: 21/22/2024 
-    - Horário: 09:30am
-    - Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
+    - Data da Maratona: 21/22/2024 `
+
+    ` - Horário: 09:30am`
+    
+    ` - Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
     `;
 
     // Defina outras informações
     const outrasInformacoes = `
-    - A maratona envolve equipes de desenvolvedores solucionando desafios de programação.
-    - Os problemas têm diferentes níveis de dificuldade.
-    - As equipes podem escolher qualquer linguagem de programação.
-    - É proibido o uso de dispositivos eletrônicos e acesso à Internet durante a competição.
-    - As equipes podem discutir apenas internamente e a submissão de soluções é feita na plataforma do evento.
-    - Um problema é considerado resolvido se passar em todos os testes.
-    - A equipe vencedora é a que resolve a maior quantidade de problemas no tempo definido.
-    - Os participantes são responsáveis por suas despesas de transporte, hospedagem, alimentação, etc.
-    `;
+    - A maratona envolve equipes de desenvolvedores solucionando desafios de programação.` 
+
+    ` - Os problemas têm diferentes níveis de dificuldade.`
+
+    `- As equipes podem escolher qualquer linguagem de programação.`
+
+    `- É proibido o uso de dispositivos eletrônicos e acesso à Internet durante a competição.`
+
+    `- As equipes podem discutir apenas internamente e a submissão de soluções é feita na plataforma do evento.`
+
+    ` - Um problema é considerado resolvido se passar em todos os testes.`
+
+    `- A equipe vencedora é a que resolve a maior quantidade de problemas no tempo definido.`
+
+    ` - Os participantes são responsáveis por suas despesas de transporte, hospedagem, alimentação, etc.`
+    
 
     // Adicione as seções com fundo colorido e títulos em negrito
     createBox('CONFIRMAÇÃO', participanteData, backgroundColor, true); // Texto justificado
