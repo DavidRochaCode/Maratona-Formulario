@@ -21,8 +21,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
+
 // Função para enviar e-mails com anexos personalizados
 const sendEmail = async (to, subject, text) => {
+  const imagePath = `confirmacao_de_inscricao_${to}.pdf`;
+// Conversão do caminho absoluto para relativo
+const relativePath = path.resolve(__dirname, imagePath);
+
   const mailOptions = {
     from: 'manoeudavi20@gmail.com',
     to: to,
@@ -31,7 +37,7 @@ const sendEmail = async (to, subject, text) => {
     attachments: [
       {
         filename: `confirmacao_de_inscricao_${to}.pdf`, // Nome do arquivo PDF no anexo
-        path: `confirmacao_de_inscricao_${email}.pdf`
+        path: relativePath
       },
     ],
   };
