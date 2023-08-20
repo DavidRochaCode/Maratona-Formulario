@@ -84,5 +84,6 @@ exports.sendEmailParticipante = async (req, res) => {
   } catch (error) {
     console.error(`Erro ao enviar o Email: ${error}`);
     res.status(500).send('Erro ao enviar o email');
+    
   }
 };
