@@ -52,27 +52,29 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     let participanteData = "";
 
     if (nomeEquipe === "Sem Equipe") {
-        participanteData = `
-        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+        participanteData = 
+        `
+         Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+         sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
 
-        O estudante ${nome} encontra-se sem equipe.
+         O estudante ${nome} encontra-se sem equipe.
         `;
     } else {
-        participanteData = `
-        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+        participanteData = 
+        `
+         Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+         sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
 
-        O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
+         O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
         `;
     }
 
    // Defina as informações sobre a maratona como uma lista HTML
 const maratonaData = 
 `
-- Data da Maratona: 21/22/2024
+- Data da Maratona: 11/09/2023
 - Horário: 09:30am
-- Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José
+- Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
 `;
 
 // Defina outras informações como uma lista HTML
