@@ -1,7 +1,6 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const QRCode = require('qrcode');
-import{} from "../assets/"
 
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
     // Crie um novo documento PDF
@@ -9,7 +8,7 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     const pdfPath = `confirmacao_de_inscricao_${email}.pdf`; // Defina o caminho do arquivo PDF
     const outputStream = fs.createWriteStream(pdfPath);
 
-    // Pipe o conteúdo do PDF para um araquivo
+    // Pipe o conteúdo do PDF para um arquivo
     doc.pipe(outputStream);
 
     // Centralize todo o conteúdo na página
@@ -27,7 +26,7 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     const backgroundColor = '#f0f0f0';
 
     // Função para criar uma caixa com um fundo colorido e título em negrito
-    function createBox(title, content, color) {
+    function createBox(title, content, color, justifyText = false) {
         const titleFontSize = 11;
         const regularFontSize = 10;
 
@@ -39,7 +38,13 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         doc.moveDown(0.5);
 
         doc.fontSize(regularFontSize);
-        doc.fillColor('#000').font(regularFont).text(content, { align: 'left', width: contentWidth, continued: false });
+        doc.fillColor('#000').font(regularFont);
+
+        if (justifyText) {
+            doc.text(content, { align: 'justify', width: contentWidth, continued: false });
+        } else {
+            doc.text(content, { align: 'left', width: contentWidth, continued: false });
+        }
 
         doc.moveDown(1);
     }
@@ -81,21 +86,26 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     `;
 
     // Adicione as seções com fundo colorido e títulos em negrito
-    createBox('CONFIRMAÇÂO', participanteData, backgroundColor);
-    createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor);
-    createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor);
+    createBox('CONFIRMAÇÂO', participanteData, backgroundColor, true); // Texto justificado
+    createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
+    createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true); // Texto justificado
 
     // Defina a posição horizontal da primeira imagem
-    //const imageXPosition1 = xPosition;
+    const imageXPosition1 = xPosition;
+
+    const imagePath = '../assets/logo.png';
+
+    // Conversão do caminho absoluto para relativo
+    const imageRelativePath = path.resolve(__dirname, imagePath);
 
     // Adicione a primeira imagem ao rodapé
-   /*  const imagePath1 = '../assets/logo.png'; // Substitua pelo caminho da sua primeira imagem
+    const imagePath1 = imageRelativePath; // Substitua pelo caminho da sua primeira imagem
     const imageWidth1 = 100; // Largura da primeira imagem em pixels
     const imageHeight1 = 100; // Altura da primeira imagem em pixels
     doc.image(imagePath1, imageXPosition1, pageHeight - imageHeight1 - 20, {
         width: imageWidth1,
         height: imageHeight1
-    }); */
+    });
 
     // Gere o QR code
     const qrCodeValue = cpf; // Use o CPF como valor para o QR code
@@ -122,4 +132,5 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         console.log('PDF criado com sucesso no caminho: ' + pdfPath);
     });
 }
-module.exports = pdfTransporter
+
+module.exports = pdfTransporter;
