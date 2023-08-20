@@ -67,32 +67,34 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         `;
     }
 
-    // Defina as informações sobre a maratona
-    const maratonaData = `
-    - Data da Maratona: 21/22/2024 
-    `;
-    const horario= `
-    - Horário: 09:30am
-    `
-    const endereco= `
-    - Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
-    `
+   // Defina as informações sobre a maratona como uma lista HTML
+const maratonaData = `
+<ul>
+    <li>- Data da Maratona: 21/22/2024</li> 
 
-    // Defina outras informações
-    const outrasInformacoes = `
-    - A maratona envolve equipes de desenvolvedores solucionando desafios de programação.
-    - Os problemas têm diferentes níveis de dificuldade.
-    - As equipes podem escolher qualquer linguagem de programação.
-    - É proibido o uso de dispositivos eletrônicos e acesso à Internet durante a competição.
-    - As equipes podem discutir apenas internamente e a submissão de soluções é feita na plataforma do evento.
-    - Um problema é considerado resolvido se passar em todos os testes.
-    - A equipe vencedora é a que resolve a maior quantidade de problemas no tempo definido.
-    - Os participantes são responsáveis por suas despesas de transporte, hospedagem, alimentação, etc.
-    `;
+    <li>- Horário: 09:30am</li>
+    
+    <li>- Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.</li>
+</ul>
+`;
+
+// Defina outras informações como uma lista HTML
+const outrasInformacoes = `
+<ul>
+    <li>- A maratona envolve equipes de desenvolvedores solucionando desafios de programação.</li>
+    <li>- Os problemas têm diferentes níveis de dificuldade.</li>
+    <li>- As equipes podem escolher qualquer linguagem de programação.</li>
+    <li>- É proibido o uso de dispositivos eletrônicos e acesso à Internet durante a competição.</li>
+    <li>- As equipes podem discutir apenas internamente e a submissão de soluções é feita na plataforma do evento.</li>
+    <li>- Um problema é considerado resolvido se passar em todos os testes.</li>
+    <li>- A equipe vencedora é a que resolve a maior quantidade de problemas no tempo definido.</li>
+    <li>- Os participantes são responsáveis por suas despesas de transporte, hospedagem, alimentação, etc.</li>
+</ul>
+`;
 
     // Adicione as seções com fundo colorido e títulos em negrito
     createBox('CONFIRMAÇÃO', participanteData, backgroundColor, true); // Texto justificado
-    createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, horario,endereco, backgroundColor, true); // Texto justificado
+    createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
     createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true);
 
     // Gere o QR code
