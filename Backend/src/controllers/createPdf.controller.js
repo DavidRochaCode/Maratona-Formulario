@@ -3,12 +3,21 @@ const fs = require('fs');
 const util = require('util');
 const html = require ("../views/createPdfTemplate")
 const writeFile = util.promisify(fs.writeFile);
+require("dotenv").config()
 
 const pdfTransporter = async function (nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
   const pdfPath = `../pdf/confirmacao_de_inscrição_${email}.pdf`;
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: [
+        "--disable-setuid-sandbox",
+        "--no-sandbox",
+        "--single-process",
+        "--no-zygote",
+      ],
+      executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETER_EXECUTABLE_PATH: puppeteer.executablePath(),
+    });
     const page = await browser.newPage();
 
     // Gere o conteúdo HTML que deseja converter em PDF
