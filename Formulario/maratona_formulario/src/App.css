@@ -49,7 +49,6 @@
 }
 
 .app .header h2{
-  border-right: 4px solid;
   width: 20ch;
   white-space: nowrap;
   overflow: hidden;
@@ -479,7 +478,10 @@ label{
 
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 425px) {
+  .modal{
+    height: 115%;
+  }
 
   .header{
     margin-bottom: auto;
@@ -498,7 +500,7 @@ label{
 
   .modal .modalContainer {
     width: 80%;
-    height: 40%;
+    height: 50%;
 }
   .form_control .seguirInscricao {
     margin-left: 5px;
@@ -516,11 +518,11 @@ label{
 
 }
 
-@media screen and (max-width: 365px) {
+@media screen and (max-width: 366px) {
 
-  .modal{
-    height: 115%;
-  }
+ .modal{
+  width: 103%;
+ }
   .modal .modalContainer {
     width: 80%;
     height: 50%;
