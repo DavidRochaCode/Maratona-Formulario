@@ -17,7 +17,7 @@ const getTeams = async () => {
   }
 };
 
-//const time = await getTeams() --> descomentar depois de fazer deploy do backend
+await getTeams() 
 
 const TeamForm = ({
   data,
