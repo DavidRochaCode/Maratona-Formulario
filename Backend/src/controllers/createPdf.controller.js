@@ -6,7 +6,7 @@ const html = require('../views/createPdfTemplate');
 const pdfTransporter = async function (nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
   const htmlContent = html(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe);
 
-  const pdfPath = `../pdf/confirmacao_de_inscricao_${email}.pdf`; // Caminho para salvar o PDF
+  const pdfPath = `confirmacao_de_inscricao_${email}.pdf`; // Caminho para salvar o PDF
 
   // Salva o HTML em um arquivo temporário
   const tempHtmlPath = '/tmp/temp.html'; // Caminho temporário para o arquivo HTML
