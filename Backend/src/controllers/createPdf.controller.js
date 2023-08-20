@@ -47,39 +47,16 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
             doc.text(content, { align: 'left', width: contentWidth, continued: false });
         }
 
-        // Divida o conteúdo em partes e processe cada parte
-    const contentParts = content.split(/(\${[^}]+})/);
-    for (let i = 0; i < contentParts.length; i++) {
-        if (i % 2 === 0) {
-            // Texto regular
-            doc.text(contentParts[i], { align: 'left', width: contentWidth, continued: false });
-        } else {
-            // Variável a ser destacada em negrito
-            const variable = contentParts[i].slice(2, -1); // Remova os "${}" para obter o nome da variável
-            if (boldItems.includes(variable)) {
-                doc.font(titleFont);
-                doc.text(variable, { align: 'left', width: contentWidth, continued: false });
-                doc.font(regularFont);
-            } else {
-                doc.text(variable, { align: 'left', width: contentWidth, continued: false });
-            }
-        }
-    }
-
         doc.moveDown(1);
     }
 
-   // Defina os dados do participante
-// Defina os dados do participante
-const participanteData = `
-Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+    // Defina os dados do participante
+    const participanteData = `
+    Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+    sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
 
-O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
-`;
-
-// Adicione as seções com fundo colorido e títulos em negrito
-createBox('CONFIRMAÇÂO', participanteData, backgroundColor, ['nome', 'periodoFaculdade', 'cursoFaculdade', 'faculdadeNome', 'cpf', 'nomeEquipe']); // Texto justificado
+    O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
+    `;
 
     // Defina as informações sobre a maratona
     const maratonaData = `
