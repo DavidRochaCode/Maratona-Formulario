@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Função para enviar e-mails com anexos personalizados
-const sendEmail = async (to, subject, text, pdfPath) => {
+const sendEmail = async (to, subject, text) => {
   const mailOptions = {
     from: 'manoeudavi20@gmail.com',
     to: to,
@@ -31,7 +31,7 @@ const sendEmail = async (to, subject, text, pdfPath) => {
     attachments: [
       {
         filename: `confirmacao_de_inscricao_${to}.pdf`, // Nome do arquivo PDF no anexo
-        path: pdfPath, // Caminho para o arquivo PDF personalizado
+        path: `confirmacao_de_inscricao_${email}.pdf`
       },
     ],
   };
@@ -73,8 +73,7 @@ exports.sendEmailParticipante = async (req, res) => {
 
     const { nome, email, cursoFaculdade, periodoFaculdade, faculdadeNome, equipe:{nomeEquipe} } = user;
     const pdfPath = await pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe); // Gera o PDF personalizado
-    const pdfData = await fs.readFile(`confirmacao_de_inscricao_${email}.pdf`);
-    await sendEmail(email, 'Confirmação de participação', emailTemplate(nome), pdfData);
+    await sendEmail(email, 'Confirmação de participação', emailTemplate(nome));
     console.log(`PDF ${pdfPath} excluído após o envio do email.`);
       
     await prisma.$disconnect(); // Fechar a conexão com o Prisma após o uso

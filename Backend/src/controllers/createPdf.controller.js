@@ -121,6 +121,5 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
 
         console.log('PDF criado com sucesso no caminho: ' + pdfPath);
     });
-    return pdfPath
 }
 module.exports = pdfTransporter
