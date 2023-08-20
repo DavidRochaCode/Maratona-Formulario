@@ -53,19 +53,6 @@
   width: 20ch;
   white-space: nowrap;
   overflow: hidden;
-  animation: typing 2s steps(20), bliking 0.5s infinite step-end alternate;
-}
-
-@keyframes typing {
-  from{
-    width: 0;
-  }
-}
-
-@keyframes bliking{
-  50%{
-    border-color: transparent;
-  }
 }
 
 .teamName{
@@ -531,9 +518,12 @@ label{
 
 @media screen and (max-width: 365px) {
 
+  .modal{
+    height: 115%;
+  }
   .modal .modalContainer {
     width: 80%;
-    height: 45%;
+    height: 50%;
 }
   .form_control .seguirInscricao {
     margin-left: 5px;

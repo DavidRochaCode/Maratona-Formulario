@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import react from 'react'
 
-const Modal = ({onClose = () =>{location.reload()},  children}) =>{
+const Modal = ({onClose = () =>{},  children}) =>{
    return <div className='modal'>
       <div className='modalContainer'>
       <button className='modalClose' onClick={onClose}/>

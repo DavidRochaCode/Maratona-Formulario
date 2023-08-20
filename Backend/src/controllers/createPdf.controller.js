@@ -54,7 +54,7 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     if (nomeEquipe === "Sem Equipe") {
         participanteData = 
         `
-         Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+         Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade}º período do curso de ${cursoFaculdade} na ${faculdadeNome},
          sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
 
          O estudante ${nome} encontra-se sem equipe.
