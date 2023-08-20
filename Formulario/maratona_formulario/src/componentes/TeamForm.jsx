@@ -2,7 +2,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Buscar todas as equipes
 const getTeams = async () => {
@@ -104,6 +105,9 @@ const TeamForm = ({
 
   //pre-cadastrar uma equipe
   const cadastrarEquipe = () => {
+    if(nomeEquipeSelecionada === ""){
+      return toast.error("Por favor, digite o nome da sua equipe");
+    }
     if (nomeEquipeSelecionada) {
       const newTeam = { id: nextTeamId, name: nomeEquipeSelecionada };
       setTeamNames([...teamNames, newTeam]);
@@ -141,6 +145,7 @@ const TeamForm = ({
 
   return (
     <div>
+      
       <div className="cadastrarEquipe">
         <div className="form_control">
           <input
@@ -148,7 +153,7 @@ const TeamForm = ({
             type="text"
             name="text"
             id="team"
-            placeholder="Cadastrar uma equipe"
+            placeholder="1º - Digite um nome para a sua equipe"
             value={nomeEquipeSelecionada}
             onChange={(e) => setNomeEquipeSelecionada(e.target.value)}
           />
@@ -159,10 +164,12 @@ const TeamForm = ({
           >
             <span>Cadastrar</span>
           </button>
+          <ToastContainer />
         </div>
       </div>
 
       <div className="form_control">
+   
         <select
           className="select_groupe"
           name="nomeTeam"
@@ -181,7 +188,7 @@ const TeamForm = ({
           disabled={desejaSeguirInscricaoSozinho}
         >
           <option className="option-select" value="" disabled>
-            <label htmlFor="">Escolha a sua equipe</label>
+            <label htmlFor="">2º - Escolha a sua equipe</label>
           </option>
           {teamNames
             .filter(team => team.id !== 0) // Mostra apenas o time que tiverem id maior que 0.
