@@ -22,6 +22,7 @@
     "nodemailer": "^6.9.4",
     "openssl": "^2.0.0",
     "prisma": "^4.16.2",
+    "puppeteer": "^21.1.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
