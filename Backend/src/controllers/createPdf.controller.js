@@ -1,7 +1,6 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const QRCode = require('qrcode');
-const path = require('path');
 
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
     // Crie um novo documento PDF
@@ -87,20 +86,16 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     `;
 
     // Adicione as seções com fundo colorido e títulos em negrito
-    createBox('CONFIRMAÇÂO', participanteData, backgroundColor, true); // Texto justificado
+    createBox('CONFIRMAÇÃO', participanteData, backgroundColor, true); // Texto justificado
     createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
     createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true); // Texto justificado
 
-    // Defina a posição horizontal da primeira imagem
-    const imageXPosition1 = xPosition;
+
 
     const imagePath = '../assets/logo.png';
 
-    // Conversão do caminho absoluto para relativo
-    const imageRelativePath = path.resolve(__dirname, imagePath);
-
     // Adicione a primeira imagem ao rodapé
-    const imagePath1 = imageRelativePath; // Substitua pelo caminho da sua primeira imagem
+    const imagePath1 = imagePath; // Substitua pelo caminho da sua primeira imagem
     const imageWidth1 = 100; // Largura da primeira imagem em pixels
     const imageHeight1 = 100; // Altura da primeira imagem em pixels
     doc.image(imagePath1, imageXPosition1, pageHeight - imageHeight1 - 20, {
