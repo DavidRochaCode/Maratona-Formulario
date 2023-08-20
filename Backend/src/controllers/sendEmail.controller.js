@@ -73,7 +73,7 @@ exports.sendEmailParticipante = async (req, res) => {
 
     const { nome, email, cursoFaculdade, periodoFaculdade, faculdadeNome, equipe:{nomeEquipe} } = user;
     const pdfPath = await pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe); // Gera o PDF personalizado
-    const caminhoDoPdf = `./confirmacao_de_inscrição_${email}.pdf`; // Caminho do PDF gerado na mesma pasta que pdfTransporter
+    const caminhoDoPdf = `../pdf/confirmacao_de_inscrição_${email}.pdf`; // Caminho do PDF gerado na mesma pasta que pdfTransporter
     await sendEmail(email, 'Confirmação de participação', emailTemplate(nome), caminhoDoPdf);
     await fs.unlink(pdfPath); // Exclui o arquivo PDF após o envio do email
     console.log(`PDF ${pdfPath} excluído após o envio do email.`);
