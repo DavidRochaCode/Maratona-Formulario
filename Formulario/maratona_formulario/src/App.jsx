@@ -213,6 +213,7 @@ function App() {
                   const participantsCount = await getTeamParticipantsCount(data.equipeId);
                   const userCpf = await getUser(data.cpf)
                   const userEmail = await getUser(data.email)
+                  location.reload()
                   
                   setIsLoading(false)
                   if (userData != undefined) {
@@ -232,6 +233,7 @@ function App() {
                   backgroundColor: isLoading ? "#78a5a6" : "#0ec0c1", 
                   cursor: isLoading ? "not-allowed" : "pointer", 
                 }}
+
               >
                 <span>Confirmar</span>
                 <FiSend />
