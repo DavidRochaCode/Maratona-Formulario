@@ -1,131 +1,243 @@
-const fs = require('fs');
 const PDFDocument = require('pdfkit');
-const QRCode = require('qrcode');
+const fs = require('fs');
 
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
-    // Crie um novo documento PDF
-    const doc = new PDFDocument();
-    const pdfPath = `confirmacao_de_inscricao_${email}.pdf`; // Defina o caminho do arquivo PDF
-    const outputStream = fs.createWriteStream(pdfPath);
+    const doc = new PDFDocument({
+        layout: 'landscape',
+        size: 'A4',
+    });
 
-    // Pipe o conteúdo do PDF para um arquivo
-    doc.pipe(outputStream);
-
-    // Centralize todo o conteúdo na página
-    const pageWidth = doc.page.width;
-    const pageHeight = doc.page.height;
-    const contentWidth = 400;
-    const xPosition = (pageWidth - contentWidth) / 2;
-
-    // Defina estilos de fonte para títulos e conteúdo
-    doc.font('Helvetica-Bold');
-    const titleFont = 'Helvetica-Bold';
-    const regularFont = 'Helvetica';
-
-    // Adicione um fundo colorido para cada seção
-    const backgroundColor = '#f0f0f0';
-
-    // Função para criar uma caixa com um fundo colorido e título em negrito
-    function createBox(title, content, color, justifyText = false) {
-        const titleFontSize = 11;
-        const regularFontSize = 10;
-
-        doc.rect(xPosition, doc.y, contentWidth, doc.currentLineHeight() + 20).fill(color);
-
-        doc.fontSize(titleFontSize);
-        doc.fillColor('#6c043c').font(titleFont).text(title, xPosition, doc.y + 10, { align: 'center', width: contentWidth });
-
-        doc.moveDown(0.5);
-
-        doc.fontSize(regularFontSize);
-        doc.fillColor('#000').font(regularFont);
-
-        if (justifyText) {
-            doc.text(content, { align: 'justify', width: contentWidth, continued: false });
-        } else {
-            doc.text(content, { align: 'left', width: contentWidth, continued: false });
+    // Helper para pular linhas
+    function jumpLine(doc, lines) {
+        for (let index = 0; index < lines; index++) {
+            doc.moveDown();
         }
-
-        doc.moveDown(1);
     }
 
-    let participanteData = "";
+    doc.pipe(fs.createWriteStream(`confirmacao_de_inscricao_${email}.pdf`));
 
-    if (nomeEquipe === "Sem Equipe") {
-        participanteData = `
-        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+    doc.rect(0, 0, doc.page.width, doc.page.height).fill('#fff');
 
-        O estudante ${nome} encontra-se sem equipe.
-        `;
-    } else {
-        participanteData = `
-        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+    doc.fontSize(10);
 
-        O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
-        `;
-    }
+    // Margem
+    const distanceMargin = 18;
 
-    // Defina as informações sobre a maratona
-    const maratonaData = `
-    Data da Maratona: 21/22/2024 
+    doc
+        .fillAndStroke('#0e8cc3')
+        .lineWidth(20)
+        .lineJoin('round')
+        .rect(
+            distanceMargin,
+            distanceMargin,
+            doc.page.width - distanceMargin * 2,
+            doc.page.height - distanceMargin * 2,
+        )
+        .stroke();
 
-    Horário: 09:30am
+    // Cabeçalho
+    const maxWidth = 140;
+    const maxHeight = 70;
+    jumpLine(doc, 5)
 
-    Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
-    `;
-
-    // Defina outras informações
-    const outrasInformacoes = `
-    A maratona envolve equipes de desenvolvedores solucionando desafios de programação.
-
-    Os problemas têm diferentes níveis de dificuldade.
-
-    As equipes podem escolher qualquer linguagem de programação.
-
-    É proibido o uso de dispositivos eletrônicos e acesso à Internet durante a competição.
-
-    As equipes podem discutir apenas internamente e a submissão de soluções é feita na plataforma do evento.
-
-    Um problema é considerado resolvido se passar em todos os testes.
-
-    A equipe vencedora é a que resolve a maior quantidade de problemas no tempo definido.
-
-    Os participantes são responsáveis por suas despesas de transporte, hospedagem, alimentação, etc.
-    `;
-
-    // Adicione as seções com fundo colorido e títulos em negrito
-    createBox('CONFIRMAÇÃO', participanteData, backgroundColor, true); // Texto justificado
-    createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
-    createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true);
-
-    // Gere o QR code
-    const qrCodeValue = cpf; // Use o CPF como valor para o QR code
-
-    // Use o método toDataURL da biblioteca qrcode para gerar o QR code em formato de dados URL
-    QRCode.toDataURL(qrCodeValue, { errorCorrectionLevel: 'H' }, function (err, url) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        // Defina a posição horizontal da imagem do QR code
-        const qrCodeWidth = 100;
-        const qrCodeHeight = 100;
-        const imageXPosition2 = (pageWidth - qrCodeWidth) / 2;
-
-        // Adicione o QR code ao rodapé
-        doc.image(url, imageXPosition2, pageHeight - qrCodeHeight - 20, {
-            width: qrCodeWidth,
-            height: qrCodeHeight
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Super Course for Awesomes', {
+            align: 'center',
         });
 
-        // Finalize o documento PDF
-        doc.end();
+    jumpLine(doc, 2)
 
-        console.log('PDF criado com sucesso no caminho: ' + pdfPath);
+    // Conteúdo
+    doc
+        .font('fonts/NotoSansJP-Regular.otf')
+        .fontSize(16)
+        .fill('#021c27')
+        .text('CONFIRMAÇÂO', {
+            align: 'center',
+        });
+
+    jumpLine(doc, 1)
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Sua participação na Maratona de Programação - 2023 está confirmada', {
+            align: 'center',
+        });
+
+    jumpLine(doc, 2)
+
+    doc
+        .font('fonts/NotoSansJP-Bold.otf')
+        .fontSize(24)
+        .fill('#021c27')
+        .text(nome, {
+            align: 'center',
+        });
+
+    jumpLine(doc, 1)
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Com a assinatura da comissão, você poderá', {
+            align: 'center',
+        });
+
+    jumpLine(doc, 7)
+
+    doc.lineWidth(1);
+
+    // Assinaturas
+    const lineSize = 174;
+    const signatureHeight = 390;
+
+    doc.fillAndStroke('#021c27');
+    doc.strokeOpacity(0.2);
+
+    const startLine1 = 128;
+    const endLine1 = 128 + lineSize;
+    doc
+        .moveTo(startLine1, signatureHeight)
+        .lineTo(endLine1, signatureHeight)
+        .stroke();
+
+    const startLine2 = endLine1 + 32;
+    const endLine2 = startLine2 + lineSize;
+    doc
+        .moveTo(startLine2, signatureHeight)
+        .lineTo(endLine2, signatureHeight)
+        .stroke();
+
+    const startLine3 = endLine2 + 32;
+    const endLine3 = startLine3 + lineSize;
+    doc
+        .moveTo(startLine3, signatureHeight)
+        .lineTo(endLine3, signatureHeight)
+        .stroke();
+
+    doc
+        .font('fonts/NotoSansJP-Bold.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('John Doe', startLine1, signatureHeight + 10, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Associate Professor', startLine1, signatureHeight + 25, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    doc
+        .font('fonts/NotoSansJP-Bold.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Student Name', startLine2, signatureHeight + 10, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Student', startLine2, signatureHeight + 25, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    doc
+        .font('fonts/NotoSansJP-Bold.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Jane Doe', startLine3, signatureHeight + 10, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text('Director', startLine3, signatureHeight + 25, {
+            columns: 1,
+            columnGap: 0,
+            height: 40,
+            width: lineSize,
+            align: 'center',
+        });
+
+    jumpLine(doc, 4);
+
+    // Link de validação
+    const link =
+        'https://validate-your-certificate.hello/validation-code-here';
+
+    const linkWidth = doc.widthOfString(link);
+    const linkHeight = doc.currentLineHeight();
+
+    doc
+        .underline(
+            doc.page.width / 2 - linkWidth / 2,
+            448,
+            linkWidth,
+            linkHeight,
+            { color: '#021c27' },
+        )
+        .link(
+            doc.page.width / 2 - linkWidth / 2,
+            448,
+            linkWidth,
+            linkHeight,
+            link,
+        );
+
+    doc
+        .font('fonts/NotoSansJP-Light.otf')
+        .fontSize(10)
+        .fill('#021c27')
+        .text(
+            link,
+            doc.page.width / 2 - linkWidth / 2,
+            448,
+            linkWidth,
+            linkHeight
+        );
+
+    // Rodapé
+    const bottomHeight = doc.page.height - 100;
+
+    doc.image('assets/qr.png', doc.page.width / 2 - 30, bottomHeight, {
+        fit: [60, 60],
     });
+
+    doc.end();
 }
 
 module.exports = pdfTransporter;
