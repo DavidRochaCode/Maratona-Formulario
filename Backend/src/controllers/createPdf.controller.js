@@ -1,6 +1,7 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const QRCode = require('qrcode');
+import{} from "../assets/"
 
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
     // Crie um novo documento PDF
@@ -87,7 +88,7 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     const imageXPosition1 = xPosition;
 
     // Adicione a primeira imagem ao rodapé
-    const imagePath1 = './assets/logo.png'; // Substitua pelo caminho da sua primeira imagem
+    const imagePath1 = '../assets/logo.png'; // Substitua pelo caminho da sua primeira imagem
     const imageWidth1 = 100; // Largura da primeira imagem em pixels
     const imageHeight1 = 100; // Altura da primeira imagem em pixels
     doc.image(imagePath1, imageXPosition1, pageHeight - imageHeight1 - 20, {
