@@ -228,6 +228,10 @@ function App() {
                     console.log("Usuário já existe");
                     setIsModalVisible(true);
                     setModalType("error");
+                  } else{
+                    setTimeout(() => {
+                      location.reload()
+                    },5000);
                   }
                 }}
                 disabled={isLoading}
