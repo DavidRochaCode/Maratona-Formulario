@@ -85,16 +85,16 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor);
 
     // Defina a posição horizontal da primeira imagem
-    const imageXPosition1 = xPosition;
+    //const imageXPosition1 = xPosition;
 
     // Adicione a primeira imagem ao rodapé
-    const imagePath1 = '../assets/logo.png'; // Substitua pelo caminho da sua primeira imagem
+   /*  const imagePath1 = '../assets/logo.png'; // Substitua pelo caminho da sua primeira imagem
     const imageWidth1 = 100; // Largura da primeira imagem em pixels
     const imageHeight1 = 100; // Altura da primeira imagem em pixels
     doc.image(imagePath1, imageXPosition1, pageHeight - imageHeight1 - 20, {
         width: imageWidth1,
         height: imageHeight1
-    });
+    }); */
 
     // Gere o QR code
     const qrCodeValue = cpf; // Use o CPF como valor para o QR code
