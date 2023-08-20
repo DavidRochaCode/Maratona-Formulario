@@ -29,7 +29,7 @@ function App() {
    const getUser = async (cpfOrEmail) => {
     try {
       const response = await axios.get(
-        `https://formulario-maratona.onrender.com/user/get/${cpfOrEmail}`
+        `https://maratona-8tfe.onrender.com/user/get/${cpfOrEmail}`
       );
   
      return response.data

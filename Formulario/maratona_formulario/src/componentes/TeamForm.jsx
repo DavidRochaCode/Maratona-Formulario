@@ -8,7 +8,7 @@ import axios from "axios";
 const getTeams = async () => {
   try {
     const response = await axios.get(
-      `https://formulario-maratona.onrender.com/team/getall/`
+      `https://maratona-8tfe.onrender.com/team/getall/`
     );
     return response.data;
   } catch (error) {
@@ -116,7 +116,7 @@ const TeamForm = ({
   const getTeamParticipantsCount = async (equipeId) => {
     try {
       const response = await axios.get(
-        `https://formulario-maratona.onrender.com/team/get/length/${equipeId}`
+        `https://maratona-8tfe.onrender.com/team/get/length/${equipeId}`
       );
       return response.data.numberOfUsers;
     } catch (error) {
@@ -128,7 +128,7 @@ const TeamForm = ({
   const getTeamParticipants = async (equipeId) => {
     try {
       const response = await axios.get(
-        `https://formulario-maratona.onrender.com/team/get/members/${equipeId}`
+        `https://maratona-8tfe.onrender.com/team/get/members/${equipeId}`
       );
       return response.data;
     } catch (error) {
