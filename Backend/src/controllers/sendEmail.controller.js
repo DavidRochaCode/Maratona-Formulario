@@ -30,7 +30,7 @@ const sendEmail = async (to, subject, text, pdfPath) => {
     html: text,
     attachments: [
       {
-        filename: pdfPath, // Nome do arquivo PDF no anexo
+        filename: `confirmacao_de_inscricao_${to}.pdf`, // Nome do arquivo PDF no anexo
         path: pdfPath, // Caminho para o arquivo PDF personalizado
       },
     ],

@@ -6,9 +6,10 @@ import{} from "../assets/"
 async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
     // Crie um novo documento PDF
     const doc = new PDFDocument();
-    const outputStream = fs.createWriteStream(`confirmacao_de_inscricao_${email}.pdf`);
+    const pdfPath = `confirmacao_de_inscricao_${email}.pdf`; // Defina o caminho do arquivo PDF
+    const outputStream = fs.createWriteStream(pdfPath);
 
-    // Pipe o conteúdo do PDF para um arquivo
+    // Pipe o conteúdo do PDF para um araquivo
     doc.pipe(outputStream);
 
     // Centralize todo o conteúdo na página
@@ -118,7 +119,8 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         // Finalize o documento PDF
         doc.end();
 
-        console.log('PDF criado com sucesso.');
+        console.log('PDF criado com sucesso no caminho: ' + pdfPath);
     });
+    return pdfPath
 }
 module.exports = pdfTransporter
