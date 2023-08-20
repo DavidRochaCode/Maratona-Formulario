@@ -49,13 +49,23 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         doc.moveDown(1);
     }
 
-    // Defina os dados do participante
-    const participanteData = `
-    Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
-    sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+    let participanteData = "";
 
-    O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
-    `;
+    if (nomeEquipe === "Sem Equipe") {
+        participanteData = `
+        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+
+        O estudante ${nome} encontra-se sem equipe.
+        `;
+    } else {
+        participanteData = `
+        Confirmamos a participação do estudante ${nome}, atualmente no ${periodoFaculdade} período do curso de ${cursoFaculdade} na ${faculdadeNome},
+        sob o número de CPF ${cpf}, na prestigiada Maratona de Programação - 2023.
+
+        O estudante ${nome} estará contribuindo como membro da equipe "${nomeEquipe}". 
+        `;
+    }
 
     // Defina as informações sobre a maratona
     const maratonaData = `
@@ -88,8 +98,8 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     // Adicione as seções com fundo colorido e títulos em negrito
     createBox('CONFIRMAÇÃO', participanteData, backgroundColor, true); // Texto justificado
     createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
-    createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true); // Texto justificado
-    
+    createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true);
+
     // Gere o QR code
     const qrCodeValue = cpf; // Use o CPF como valor para o QR code
 
@@ -101,12 +111,14 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
         }
 
         // Defina a posição horizontal da imagem do QR code
-        const imageXPosition2 = xPosition + contentWidth - 100;
+        const qrCodeWidth = 100;
+        const qrCodeHeight = 100;
+        const imageXPosition2 = (pageWidth - qrCodeWidth) / 2;
 
         // Adicione o QR code ao rodapé
-        doc.image(url, imageXPosition2, pageHeight - 100 - 20, {
-            width: 100,
-            height: 100
+        doc.image(url, imageXPosition2, pageHeight - qrCodeHeight - 20, {
+            width: qrCodeWidth,
+            height: qrCodeHeight
         });
 
         // Finalize o documento PDF
