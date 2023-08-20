@@ -1,42 +1,36 @@
-const puppeteer = require('puppeteer');
-const fs = require('fs');
-const util = require('util');
-const html = require ("../views/createPdfTemplate")
-const writeFile = util.promisify(fs.writeFile);
-require("dotenv").config()
+const { exec } = require('child_process');
+const fs = require('fs/promises'); // Para trabalhar com sistema de arquivos
+
+const html = require('../views/createPdfTemplate');
 
 const pdfTransporter = async function (nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe) {
-  const pdfPath = `../pdf/confirmacao_de_inscrição_${email}.pdf`;
+  const htmlContent = html(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe);
 
-  try {
-    const browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
-      executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETER_EXECUTABLE_PATH: puppeteer.executablePath(),
-    });
-    const page = await browser.newPage();
+  const pdfPath = `../pdf/confirmacao_de_inscricao_${email}.pdf`; // Caminho para salvar o PDF
 
-    // Gere o conteúdo HTML que deseja converter em PDF
-    const htmlContent = html(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe);
+  // Salva o HTML em um arquivo temporário
+  const tempHtmlPath = '/tmp/temp.html'; // Caminho temporário para o arquivo HTML
+  await fs.writeFile(tempHtmlPath, htmlContent, 'utf-8');
 
-    await page.setContent(htmlContent);
-    await page.pdf({
-      path: pdfPath,
-      format: 'A4',
-      margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
-    });
+  // Comando para converter HTML para PDF usando wkhtmltopdf
+  const command = `wkhtmltopdf ${tempHtmlPath} ${pdfPath}`;
 
-    await browser.close();
-    console.log(`PDF criado em: ${pdfPath}`);
-    return pdfPath;
-  } catch (error) {
-    console.error(`Erro ao criar o PDF: ${error}`);
-    throw error;
-  }
+  // Executa o comando
+  exec(command, async (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Erro ao criar o PDF: ${error}`);
+      return;
+    }
+
+    console.log('PDF criado com sucesso!');
+
+    // Remove o arquivo HTML temporário
+    await fs.unlink(tempHtmlPath);
+
+    // Agora você pode continuar com a manipulação do PDF, como envio por email, etc.
+    // Retorne o caminho do PDF gerado
+    resolve(pdfPath);
+  });
 };
 
 module.exports = pdfTransporter;
