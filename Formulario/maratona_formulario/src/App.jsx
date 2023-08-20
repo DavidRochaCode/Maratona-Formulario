@@ -220,7 +220,7 @@ function App() {
                     setTimeout(()=>{
                       setIsModalVisible(true);
                     setModalType("success");
-                    },2000)
+                    },5000)
                   } else if(participantsCount===3) {
                     setIsModalVisible(true);
                     setModalType("listaCheia")
