@@ -90,15 +90,13 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     createBox('INFORMAÇÕES SOBRE A MARATONA', maratonaData, backgroundColor, true); // Texto justificado
     createBox('OUTRAS INFORMAÇÕES', outrasInformacoes, backgroundColor, true); // Texto justificado
 
-
-
     const imagePath = '../assets/logo.png';
 
     // Adicione a primeira imagem ao rodapé
     const imagePath1 = imagePath; // Substitua pelo caminho da sua primeira imagem
     const imageWidth1 = 100; // Largura da primeira imagem em pixels
     const imageHeight1 = 100; // Altura da primeira imagem em pixels
-    doc.image(imagePath1, imageXPosition1, pageHeight - imageHeight1 - 20, {
+    doc.image(imagePath1, xPosition, pageHeight - imageHeight1 - 20, {
         width: imageWidth1,
         height: imageHeight1
     });
