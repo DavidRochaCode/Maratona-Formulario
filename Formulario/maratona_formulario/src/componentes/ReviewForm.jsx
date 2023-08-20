@@ -9,7 +9,7 @@ import { useState } from "react";
 export const sendEmail = async (cpf) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/emails/${cpf}`
+      `https://formulario-maratona.onrender.com/emails/${cpf}`
     );
     return response
   } catch (error) {
@@ -22,7 +22,7 @@ export const sendEmail = async (cpf) => {
 export const temExist = async(id)=>{
   try {
     const response = await axios.get(
-      `http://localhost:3001/team/get/${id}`
+      `https://formulario-maratona.onrender.com/team/get/${id}`
     );
     return response.data
   } catch (error) {
@@ -34,7 +34,7 @@ export const temExist = async(id)=>{
 export const getTeamParticipantsCount = async (equipeId) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/team/get/length/${equipeId}`
+      `https://formulario-maratona.onrender.com/team/get/length/${equipeId}`
     );
     return response.data.numberOfUsers;
   } catch (error) {
@@ -47,7 +47,7 @@ export const getTeamParticipantsCount = async (equipeId) => {
 export const getUser = async (cpfOrEmail) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/user/get/${cpfOrEmail}`
+      `https://formulario-maratona.onrender.com/user/get/${cpfOrEmail}`
     );
     return response.data
   } catch (error) {
@@ -74,7 +74,7 @@ export const cadastrar = async (data) => {
    const team = await temExist(data.equipeId)
    if(!team){
      // Cadastrar Equipe
-     const equipe = await axios.post("http://localhost:3001/team/create", {
+     const equipe = await axios.post("https://formulario-maratona.onrender.com/team/create", {
       id: data.equipeId,
       nomeEquipe: data.nomeTeam
     });
@@ -90,7 +90,7 @@ export const cadastrar = async (data) => {
 
     // Cadastro de Participante
     const cadastrarUsuario = await axios.post(
-      "http://localhost:3001/user/create",
+      "https://formulario-maratona.onrender.com/user/create",
       {
         cpf: data.cpf,
         nome: data.nome,

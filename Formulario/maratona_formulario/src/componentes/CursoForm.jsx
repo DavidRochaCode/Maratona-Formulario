@@ -20,7 +20,7 @@ const matricular = async (info, sucesso, erro,isEnptyField, verifyEmail, invalid
 
     
        const curso = await axios.post(
-            "http://localhost:3001/course/create",
+            "https://formulario-maratona.onrender.com/course/create",
             {
               participanteNome: info.nome,
               participanteEmail: info.email,
