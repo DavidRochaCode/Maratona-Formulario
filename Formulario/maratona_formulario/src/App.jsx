@@ -217,8 +217,10 @@ function App() {
                   
                   setIsLoading(false)
                   if (userData != undefined) {
-                    setIsModalVisible(true);
+                    setTimeout(()=>{
+                      setIsModalVisible(true);
                     setModalType("success");
+                    },2000)
                   } else if(participantsCount===3) {
                     setIsModalVisible(true);
                     setModalType("listaCheia")
