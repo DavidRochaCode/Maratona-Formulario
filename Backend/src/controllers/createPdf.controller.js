@@ -68,14 +68,11 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
     }
 
    // Defina as informações sobre a maratona como uma lista HTML
-const maratonaData = `
-<ul>
-    <li>- Data da Maratona: 21/22/2024</li> 
-
-    <li>- Horário: 09:30am</li>
-
-    <li>- Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.</li>
-</ul>
+const maratonaData = 
+`
+- Data da Maratona: 21/22/2024
+- Horário: 09:30am
+- Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José
 `;
 
 // Defina outras informações como uma lista HTML
@@ -108,8 +105,8 @@ const outrasInformacoes =
         }
 
         // Defina a posição horizontal da imagem do QR code
-        const qrCodeWidth = 100;
-        const qrCodeHeight = 100;
+        const qrCodeWidth = 150;
+        const qrCodeHeight = 150;
         const imageXPosition2 = (pageWidth - qrCodeWidth) / 2;
 
         // Adicione o QR code ao rodapé
