@@ -3,13 +3,14 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { PATH_URL } from "../services";
 
 //Função de buscar rota para o envio de e-mails
 
 export const sendEmail = async (cpf) => {
   try {
     const response = await axios.get(
-      `https://maratona-8tfe.onrender.com/emails/${cpf}`
+      `${PATH_URL}/emails/${cpf}`
     );
     return response
   } catch (error) {
@@ -22,7 +23,7 @@ export const sendEmail = async (cpf) => {
 export const temExist = async(id)=>{
   try {
     const response = await axios.get(
-      `https://maratona-8tfe.onrender.com/team/get/${id}`
+      `${PATH_URL}/team/get/${id}`
     );
     return response.data
   } catch (error) {
@@ -34,7 +35,7 @@ export const temExist = async(id)=>{
 export const getTeamParticipantsCount = async (equipeId) => {
   try {
     const response = await axios.get(
-      `https://maratona-8tfe.onrender.com/team/get/length/${equipeId}`
+      `${PATH_URL}/team/get/length/${equipeId}`
     );
     return response.data.numberOfUsers;
   } catch (error) {
@@ -47,7 +48,7 @@ export const getTeamParticipantsCount = async (equipeId) => {
 export const getUser = async (cpfOrEmail) => {
   try {
     const response = await axios.get(
-      `https://maratona-8tfe.onrender.com/user/get/${cpfOrEmail}`
+      `${PATH_URL}/user/get/${cpfOrEmail}`
     );
     return response.data
   } catch (error) {
@@ -74,7 +75,7 @@ export const cadastrar = async (data) => {
    const team = await temExist(data.equipeId)
    if(!team){
      // Cadastrar Equipe
-     const equipe = await axios.post("https://maratona-8tfe.onrender.com/team/create", {
+     const equipe = await axios.post(`${PATH_URL}/team/create`, {
       id: data.equipeId,
       nomeEquipe: data.nomeTeam
     });
@@ -90,7 +91,7 @@ export const cadastrar = async (data) => {
 
     // Cadastro de Participante
     const cadastrarUsuario = await axios.post(
-      "https://maratona-8tfe.onrender.com/user/create",
+      `${PATH_URL}/user/create`,
       {
         cpf: data.cpf,
         nome: data.nome,

@@ -23,13 +23,14 @@ import { cadastrar } from "../src/componentes/ReviewForm";
 import { getTeamParticipantsCount } from "./componentes/ReviewForm";
 import axios from "axios";
 import InicialInformation from "./componentes/InicialInformation";
+import { PATH_URL } from "./services";
 
 function App() {
 
    const getUser = async (cpfOrEmail) => {
     try {
       const response = await axios.get(
-        `https://maratona-8tfe.onrender.com/user/get/${cpfOrEmail}`
+        `${PATH_URL}/user/get/${cpfOrEmail}`
       );
   
      return response.data

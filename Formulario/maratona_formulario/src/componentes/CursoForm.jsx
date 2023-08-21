@@ -6,6 +6,7 @@ import {Multiselect} from 'multiselect-react-dropdown'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { PATH_URL } from "../services";
 
 
 const matricular = async (info, sucesso, erro,isEnptyField, verifyEmail, invalidEmail, emptyFields)=>{
@@ -20,7 +21,7 @@ const matricular = async (info, sucesso, erro,isEnptyField, verifyEmail, invalid
 
     
        const curso = await axios.post(
-            "https://maratona-8tfe.onrender.com/course/create",
+            `${PATH_URL}/course/create`,
             {
               participanteNome: info.nome,
               participanteEmail: info.email,

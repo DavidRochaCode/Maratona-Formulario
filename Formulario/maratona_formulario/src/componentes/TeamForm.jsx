@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PATH_URL } from "../services";
 
 //Buscar todas as equipes
 const getTeams = async () => {
   try {
     const response = await axios.get(
-      `https://maratona-8tfe.onrender.com/team/getall/`
+      `${PATH_URL}/team/getall/`
     );
     return response.data;
   } catch (error) {
@@ -119,7 +120,7 @@ const TeamForm = ({
   const getTeamParticipantsCount = async (equipeId) => {
     try {
       const response = await axios.get(
-        `https://maratona-8tfe.onrender.com/team/get/length/${equipeId}`
+        `${PATH_URL}/team/get/length/${equipeId}`
       );
       return response.data.numberOfUsers;
     } catch (error) {
@@ -131,7 +132,7 @@ const TeamForm = ({
   const getTeamParticipants = async (equipeId) => {
     try {
       const response = await axios.get(
-        `https://maratona-8tfe.onrender.com/team/get/members/${equipeId}`
+        `${PATH_URL}/team/get/members/${equipeId}`
       );
       return response.data;
     } catch (error) {
