@@ -61,7 +61,7 @@ const TeamForm = ({
 
     // Se o checkbox foi marcado, envie true para handleTeamChange e false para updateFieldHandler
     if (e.target.checked) {
-      handleTeamChange("Sem Equipe", 0);
+      handleTeamChange("Sem Equipe", "0");
     }else{
       handleTeamChange(teamNames.name, teamNames.id);
       updateFieldHandler("nomeTeam", teamNames.name)
@@ -204,7 +204,7 @@ const TeamForm = ({
             <label htmlFor="">2º - Escolha a sua equipe</label>
           </option>
           {teamNames
-            .filter(team => team.id !== 0) // Mostra apenas o time que tiverem id maior que 0.
+            .filter(team => team.id !== "0") // Mostra apenas o time que tiverem id maior que 0.
             .map(team => (
               <option key={team.id} value={team.name}>
                 {team.name}
