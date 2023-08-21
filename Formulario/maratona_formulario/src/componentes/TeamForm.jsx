@@ -17,7 +17,6 @@ const getTeams = async () => {
   }
 };
 
-await getTeams() 
 
 const TeamForm = ({
   data,
