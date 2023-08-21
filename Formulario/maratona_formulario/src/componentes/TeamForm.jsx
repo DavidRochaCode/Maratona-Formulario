@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PATH_URL } from "../services";
+import CryptoJS from 'crypto-js'
 
 //Buscar todas as equipes
 const getTeams = async () => {
@@ -109,11 +110,23 @@ const TeamForm = ({
       return toast.error("Por favor, digite o nome da sua equipe");
     }
     if (nomeEquipeSelecionada) {
-      const newTeam = { id: nextTeamId, name: nomeEquipeSelecionada };
-      setTeamNames([...teamNames, newTeam]);
-      setNomeEquipeSelecionada("");
-      setNextTeamId(nextTeamId + 1); // Increment the next available ID
+
+      // Calcular o hash SHA-256 do nome da equipe
+      const sha256 = CryptoJS.SHA256(nomeEquipeSelecionada);
+      const encryptedText = sha256.toString(CryptoJS.enc.Hex).slice(0, 16);
+
+     // Criar um novo time com o hash criptografado como ID
+    const newTeam = { id: encryptedText, name: nomeEquipeSelecionada };
+    
+    // Exibir o valor do ID no console para fins de teste
+    console.log("Novo ID da Equipe:", encryptedText); //--> Teste
+
+
+    setTeamNames([...teamNames, newTeam]);
+    setNomeEquipeSelecionada("");
     }
+
+    console.log()
   };
 
   //Buscar quantidade de participantes
