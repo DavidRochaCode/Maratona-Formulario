@@ -12,5 +12,11 @@ app.use(express.json())
 
 routes(app)
 
+// Rota de verificação de saúde
+app.get('/healthcheck', (req, res) => {
+    res.status(200).json({ message: 'OK' });
+  });
+  
+
 app.listen( process.env.PORT || 3001)
 console.log("Servidor iniciado")

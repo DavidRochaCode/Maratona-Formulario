@@ -138,7 +138,7 @@ function App() {
                 </p>
                 <p>
                   Qualquer dúvida ou retificação, entre em contato com o comitê
-                  pelo e-mail: <label>maratonaprogupe@gmail.com</label>.
+                  pelo e-mail: <label>comite.da.maratona@gmail.com</label>.
                 </p>
               </div>
             ) : modalType === "error" ? (
@@ -155,7 +155,7 @@ function App() {
                 <p>
                   Caso o erro não seja esse, por favor, tente novamente mais
                   tarde ou entre em contato com o comitê pelo e-mail:{" "}
-                  <label>maratonaprogupe@gmail.com</label>.
+                  <label>comite.da.maratona@gmail.com</label>.
                 </p>
               </div>
             ) :modalType === "listaCheia" ? (
@@ -169,7 +169,7 @@ function App() {
                 </p>
                 <p>
                   Para mais informação, entre em contato com o comitê pelo e-mail:{" "}
-                  <label>maratonaprogupe@gmail.com</label>.
+                  <label>comite.da.maratona@gmail.com</label>.
                 </p>
               </div>
             ) : null}
