@@ -126,7 +126,7 @@ function App() {
             {modalType === "success" ? (
               <div className="modalInfo">
                 <h2>
-                  Olá, <label>{data.nome}.</label>
+                  Olá, <label>{data.nome.split(' ')[0]}.</label>
                 </h2>
                 <p>
                   Sua inscrição na Maratona de Programação 2023 foi realizada
