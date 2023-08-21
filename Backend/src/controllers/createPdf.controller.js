@@ -72,8 +72,8 @@ async function pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade
    // Defina as informações sobre a maratona como uma lista HTML
 const maratonaData = 
 `
-- Data da Maratona: 11/09/2023
-- Horário: 09:30am
+- Data da Maratona: 14/09/2023
+- Horário: 09:30am - 17:30pm
 - Endereço: Universidade de Pernambuco, campus Garanhuns, localizada na Rua Cap. Pedro Rodrigues - São José.
 `;
 
