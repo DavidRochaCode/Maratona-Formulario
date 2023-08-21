@@ -1,1 +1,1 @@
-export const PATH_URL = "http://localhost:3001"
+export const PATH_URL = "https://maratona-o4on.onrender.com"
