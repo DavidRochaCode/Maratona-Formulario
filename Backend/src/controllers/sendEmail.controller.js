@@ -78,8 +78,15 @@ exports.sendEmailParticipante = async (req, res) => {
 
     const pdfPath = await pdfTransporter(nome, cpf, email, cursoFaculdade, periodoFaculdade, faculdadeNome, nomeEquipe); // Gera o PDF personalizado
     await sendEmail(email, 'Confirmação de participação', emailTemplate(nome));
-    console.log(`PDF confirmacao_de_inscricao_${email}.pdf excluído após o envio do email.`);
-      
+
+      // Após enviar o e-mail, exclua o arquivo PDF
+      try {
+      await fs.unlink(`confirmacao_de_inscricao_${email}.pdf`);
+      console.log(`PDF: confirmacao_de_inscricao_${email}.pdf excluído após o envio do email.`);
+    } catch (error) {
+      console.log("Erro ao deletar o pdf: "+ error)
+    }
+
     await prisma.$disconnect(); // Fechar a conexão com o Prisma após o uso
 
     res.status(200).send('Email enviado com sucesso!');

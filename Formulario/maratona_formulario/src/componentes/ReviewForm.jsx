@@ -84,7 +84,7 @@ export const cadastrar = async (data) => {
   
     // Verificar se o grupo está cheio
     const participantsCount = await getTeamParticipantsCount(data.equipeId);
-    if (data.equipeId != 0 && participantsCount === 3) {
+    if (data.equipeId != "0" && participantsCount === 3) {
       return; // Sai da função se o grupo estiver cheio
     }
 

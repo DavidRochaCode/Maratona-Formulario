@@ -19,7 +19,7 @@ export const create = async(req, res) =>{
 
 export const get = async(req, res) =>{
     try {
-        const team = await getTeam(Number(req.params.id))
+        const team = await getTeam(req.params.id)
         res.status(200).send(team)
     } catch (error) {
         res.status(400).send(error)
@@ -43,7 +43,7 @@ export const getAll = async(req, res) =>{
 
 export const getTeamLength = async(req,res) =>{
     try {
-        const teamLength = await getTeamLength(Number(req.params.id))
+        const teamLength = await getTeamLength(req.params.id)
         res.status(200).send(teamLength)
     } catch (error) {
         res.status(400).send(error)
@@ -55,7 +55,7 @@ export const getTeamLength = async(req,res) =>{
 
 export const getTeamMembers = async(req,res) =>{
     try {
-        const getTeamMembers = await getTeamParticipants(Number(req.params.id))
+        const getTeamMembers = await getTeamParticipants(req.params.id)
         res.status(200).send(getTeamMembers)
     } catch (error) {
         res.status(400).send(error)

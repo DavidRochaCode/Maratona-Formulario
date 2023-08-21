@@ -13,7 +13,7 @@ model Usuario{
   nome String
   email String @unique
   celular String 
-  equipeId Int  
+  equipeId String
   equipe Equipe @relation(fields: [equipeId], references: [id])
   faculdadeNome String
   cursoFaculdade String
@@ -21,7 +21,7 @@ model Usuario{
 }
 
 model Equipe{
-  id Int @id 
+  id String @id 
   nomeEquipe String
   usuarios Usuario[]
   dataCriacao DateTime @default(now())
