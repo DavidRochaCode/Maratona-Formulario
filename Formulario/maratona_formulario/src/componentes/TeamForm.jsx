@@ -13,7 +13,7 @@ const getTeams = async () => {
   try {
 
     const response = await axios.get(
-      `${PATH_URL}/team/getall/`    //--------------------------------------------> Tirar 1 l
+      `${PATH_URL}/team/getall/`
     );
     carregado = true
     return response.data;
@@ -197,12 +197,7 @@ const TeamForm = ({
             <label htmlFor="">2º - Escolha a sua equipe</label>
           </option >
            {/* Renderizar o PulseLoader enquanto as equipes estão sendo carregadas */}
-        {!carregado && (
-          <option className="loading-message"value="" disabled>
-           Carregando as outras equipes. Aguarde ...
-            
-          </option>
-        )}
+       
           {teamNames
             .filter(team => team.id !== "0") 
             .map(team => (
@@ -210,6 +205,12 @@ const TeamForm = ({
                 {team.name}
               </option>
             ))}
+             {!carregado && (
+          <option className="loading-message"value="" disabled>
+           Carregando as outras equipes. Aguarde ...
+            
+          </option>
+        )}
         </select>
         <div className="check">
           <input
