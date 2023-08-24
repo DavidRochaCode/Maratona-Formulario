@@ -13,7 +13,7 @@ const getTeams = async () => {
   try {
 
     const response = await axios.get(
-      `${PATH_URL}/team/getall/`
+      `${PATH_URL}/team/getall/` 
     );
     carregado = true
     return response.data;
