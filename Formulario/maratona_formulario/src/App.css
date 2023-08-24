@@ -554,6 +554,23 @@ label{
 
 }
 
+.form_control .loading-message {
+  animation: blink 1s infinite;
+  color: #0ec0c1;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .cadastrarEquipe .form_control .button {
   width: 100px;
   font-size: 0.9rem;

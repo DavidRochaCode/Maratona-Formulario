@@ -6,31 +6,35 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PATH_URL } from "../services";
 import CryptoJS from 'crypto-js'
+let carregado;
 
-//Buscar todas as equipes
+// Buscar todas as equipes
 const getTeams = async () => {
   try {
+
     const response = await axios.get(
-      `${PATH_URL}/team/getall/`
+      `${PATH_URL}/team/getall/`    //--------------------------------------------> Tirar 1 l
     );
+    carregado = true
     return response.data;
+
   } catch (error) {
     throw new Error("Erro ao obter a quantidade de participantes da equipe.");
   }
 };
-
 
 const TeamForm = ({
   data,
   updateFieldHandler,
   handleTeamChange,
 }) => {
-
   const [teamNames, setTeamNames] = useState([]);
   const [desejaSeguirInscricaoSozinho, setDesejaSeguirInscricaoSozinho] =
     useState(false);
   const [nextTeamId, setNextTeamId] = useState(1);
 
+  
+  
   // Busca equipes na montagem do componente
   useEffect(() => {
     const fetchTeams = async () => {
@@ -42,12 +46,11 @@ const TeamForm = ({
           name: team.nomeEquipe
         }));
         setTeamNames(formattedTeams);
-        // Determine the next available team ID
+        // Determine o próximo ID de equipe disponível
         if (formattedTeams.length > 0) {
           const maxId = Math.max(...formattedTeams.map(team => team.id));
           setNextTeamId(maxId + 1);
         }
-
       } catch (error) {
         console.error(error.message);
       }
@@ -62,9 +65,9 @@ const TeamForm = ({
     // Se o checkbox foi marcado, envie true para handleTeamChange e false para updateFieldHandler
     if (e.target.checked) {
       handleTeamChange("Sem Equipe", "0");
-    }else{
+    } else {
       handleTeamChange(teamNames.name, teamNames.id);
-      updateFieldHandler("nomeTeam", teamNames.name)
+      updateFieldHandler("nomeTeam", teamNames.name);
     }
   };
 
@@ -75,7 +78,7 @@ const TeamForm = ({
   useEffect(() => {
     setDesejaSeguirInscricaoSozinho(data.checked);
 
-    //Buscar quantidade de participantes
+    // Buscar quantidade de participantes
     const fetchParticipantsCount = async () => {
       try {
         const count = await getTeamParticipantsCount(data.equipeId);
@@ -86,9 +89,8 @@ const TeamForm = ({
       }
     };
 
-    //Buscar os usuários da equipe
+    // Buscar os usuários da equipe
     const fetchParticipants = async () => {
-      
       try {
         const participantsData = await getTeamParticipants(data.equipeId);
         setParticipants(participantsData.usuarios);
@@ -103,33 +105,28 @@ const TeamForm = ({
     }
   }, [data.checked, data.equipeId]);
 
-
   //pre-cadastrar uma equipe
   const cadastrarEquipe = () => {
-    if(nomeEquipeSelecionada === ""){
+    if (nomeEquipeSelecionada === "") {
       return toast.error("Por favor, digite o nome da sua equipe");
     }
     if (nomeEquipeSelecionada) {
-
       // Calcular o hash SHA-256 do nome da equipe
       const sha256 = CryptoJS.SHA256(nomeEquipeSelecionada);
       const encryptedText = sha256.toString(CryptoJS.enc.Hex).slice(0, 16);
 
-     // Criar um novo time com o hash criptografado como ID
-    const newTeam = { id: encryptedText, name: nomeEquipeSelecionada };
-    
-    // Exibir o valor do ID no console para fins de teste
-    console.log("Novo ID da Equipe:", encryptedText); //--> Teste
+      // Criar um novo time com o hash criptografado como ID
+      const newTeam = { id: encryptedText, name: nomeEquipeSelecionada };
 
+      // Exibir o valor do ID no console para fins de teste
+      console.log("Novo ID da Equipe:", encryptedText);
 
-    setTeamNames([...teamNames, newTeam]);
-    setNomeEquipeSelecionada("");
+      setTeamNames([...teamNames, newTeam]);
+      setNomeEquipeSelecionada("");
     }
-
-    console.log()
   };
 
-  //Buscar quantidade de participantes
+  // Buscar quantidade de participantes
   const getTeamParticipantsCount = async (equipeId) => {
     try {
       const response = await axios.get(
@@ -141,7 +138,7 @@ const TeamForm = ({
     }
   };
 
-  //Buscar participantes de uma equipe
+  // Buscar participantes de uma equipe
   const getTeamParticipants = async (equipeId) => {
     try {
       const response = await axios.get(
@@ -151,14 +148,10 @@ const TeamForm = ({
     } catch (error) {
       throw new Error("Erro ao obter os participantes da equipe.");
     }
-
   };
-
-
 
   return (
     <div>
-      
       <div className="cadastrarEquipe">
         <div className="form_control">
           <input
@@ -170,6 +163,7 @@ const TeamForm = ({
             value={nomeEquipeSelecionada}
             onChange={(e) => setNomeEquipeSelecionada(e.target.value)}
           />
+
           <button
             className="button"
             type="button"
@@ -182,7 +176,6 @@ const TeamForm = ({
       </div>
 
       <div className="form_control">
-   
         <select
           className="select_groupe"
           name="nomeTeam"
@@ -199,12 +192,19 @@ const TeamForm = ({
             updateFieldHandler("nomeTeam", name);
           }}
           disabled={desejaSeguirInscricaoSozinho}
-        >
+        > 
           <option className="option-select" value="" disabled>
             <label htmlFor="">2º - Escolha a sua equipe</label>
+          </option >
+           {/* Renderizar o PulseLoader enquanto as equipes estão sendo carregadas */}
+        {!carregado && (
+          <option className="loading-message"value="" disabled>
+           Carregando as outras equipes. Aguarde ...
+            
           </option>
+        )}
           {teamNames
-            .filter(team => team.id !== "0") // Mostra apenas o time que tiverem id maior que 0.
+            .filter(team => team.id !== "0") 
             .map(team => (
               <option key={team.id} value={team.name}>
                 {team.name}
@@ -227,11 +227,11 @@ const TeamForm = ({
         {data.nomeTeam && !desejaSeguirInscricaoSozinho ? (
           <>
             <p>Essa equipe possui {participantsCount} participante(s):</p>
-              {participants && participants.map(  participant => (
-                <p key={participant.cpf}>
-                 - {participant.nome}
-                </p>
-      ))}
+            {participants && participants.map(participant => (
+              <p key={participant.cpf}>
+                - {participant.nome}
+              </p>
+            ))}
           </>
         ) : (
           <p></p>
