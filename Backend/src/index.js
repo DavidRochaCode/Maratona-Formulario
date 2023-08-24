@@ -20,15 +20,5 @@ app.get('/healthcheck', (req, res) => {
   
 
 
-app.listen( process.env.PORT || 3001, ()=>{
-  // A ideia é a cada 3 minutos fazer uma requisição ao servidor
-  setInterval(()=>{
-    try {
-      getAll
-      console.log("Equipe buscada")
-    } catch (error) {
-      console.log("Ocorreu um erro em carregar a equipe no servidor: " + error)
-    }
-  },1000)
-})
+app.listen( process.env.PORT || 3001)
 console.log("Servidor iniciado")
