@@ -236,7 +236,13 @@ label{
     padding: 0.8rem;
     border: 1px solid #e3fafabd;
     border-radius: 10px;
+
+    .cor_atencao {
+      color: #0ec0c1;
+    }
   }
+
+ 
 
   .review_form_groupe{
     max-width: 400px;

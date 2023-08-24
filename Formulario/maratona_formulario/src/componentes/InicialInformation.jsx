@@ -10,15 +10,15 @@ const InicialInformation = () => {
           <div className="incones">
             <AiOutlineCode />
           </div>
-          <label htmlFor=""> 
-            Na etapa inicial, você pode se inscrever nos cursos de JavaScript, Dart/Flutter ou em ambos. Caso queira participar da Maratona de Programação - 2023, basta prosseguir clicando no botão "Avançar".
+          <label > 
+            Na etapa inicial, <label className="cor_atencao">você pode</label> se inscrever nos cursos de JavaScript, Dart/Flutter ou em ambos. <label className="cor_atencao">caso queira</label> participar da Maratona de Programação - 2023, basta prosseguir clicando no botão "Avançar".
            </label>
         </div>
         <div className='inconesContainer'>
           <div className="incones">
             <AiOutlineTeam />
           </div>
-          <label htmlFor="">Nesta etapa, você pode se inscrever na maratona. Se você é o representante da equipe, crie um novo time especificando o nome. Se não for o representante, selecione sua equipe da lista e continue. Se você estiver sem equipe, escolha a opção "Desejo seguir a inscrição sem equipe" . </label>
+          <label htmlFor="">Nesta etapa, você pode se inscrever na maratona. <label className="cor_atencao">Se você é o representante da equipe</label> , crie um novo time especificando o nome. <label className="cor_atencao">Se não for o representante</label> , selecione sua equipe da lista e continue. <label className="cor_atencao">Se você estiver sem equipe</label> , escolha a opção "Desejo seguir a inscrição sem equipe" . </label>
         </div >
         <div className='inconesContainer'>
           <div className="incones">
@@ -30,7 +30,7 @@ const InicialInformation = () => {
           <div className="incones">
             <FiSend />
           </div>
-          <label htmlFor="">Nesta etapa, revise seus dados. Se estiverem corretos, clique em Finalizar. </label>
+          <label htmlFor="">Nesta etapa, <label className="cor_atencao">revise seus dados.</label>  Se estiverem corretos, clique em Finalizar. </label>
         </div>
       </div>
     </div>
