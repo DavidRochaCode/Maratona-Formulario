@@ -29,6 +29,6 @@ app.listen( process.env.PORT || 3001, ()=>{
     } catch (error) {
       console.log("Ocorreu um erro em carregar a equipe no servidor: " + error)
     }
-  },180000)
+  },1000)
 })
 console.log("Servidor iniciado")
