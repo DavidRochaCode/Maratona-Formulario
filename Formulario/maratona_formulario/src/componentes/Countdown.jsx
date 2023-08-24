@@ -22,7 +22,8 @@ const Countdown = () => {
 		return () => {
 			clearInterval(timer);
 		};
-	}, []);
+	}, []); 
+	
 
 	return (
 		<div className='countdown'>
