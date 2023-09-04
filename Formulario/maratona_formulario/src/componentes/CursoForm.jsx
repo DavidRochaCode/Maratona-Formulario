@@ -95,7 +95,7 @@ const CursoForm = () => {
     <div>
       {terminadoInscricao ? (
         <div>
-          <h1 style={{color:"#0ec0c1"}}>A inscrição dos cursos foi finalizadas.</h1>
+          <h1 style={{color:"#0ec0c1"}}>A inscrição dos cursos foi finalizada.</h1>
           <br />
           <h2 style={{color:"#0ec0c1"}}>Caso queria se inscrever na Maratona de Programação, prossiga clicando no botão "Avançar"</h2>
         
