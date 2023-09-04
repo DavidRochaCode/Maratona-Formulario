@@ -102,6 +102,7 @@ const CursoForm = () => {
       <div className="form_control">
         <label htmlFor="nome">Nome:</label>
         <input
+          disabled
           type="text"
           name="text"
           id="nome"
@@ -114,6 +115,7 @@ const CursoForm = () => {
       <div className="form_control">
         <label htmlFor="email">Email:</label>
         <input
+          disabled
           type="text"
           name="text"
           id="email"
@@ -127,6 +129,7 @@ const CursoForm = () => {
       <div className="form_control">
         <label htmlFor="celular">Celular:</label>
         <InputMask
+          disabled
           mask="(99) 9 9999-9999"
           placeholder="Seu Celular"
           type="text"
@@ -140,6 +143,7 @@ const CursoForm = () => {
       <div  className="form_control">
       <label htmlFor="celular">Cursos:</label>
       <Multiselect
+          disabled
           placeholder="Selecione quantos quiser"
           options={options}
           displayValue="Curso"
