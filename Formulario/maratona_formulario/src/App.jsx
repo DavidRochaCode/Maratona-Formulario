@@ -201,7 +201,7 @@ function App() {
               </button>
             )}
             {!isLastStep ? (
-              <button type="submite">
+              <button disabled type="submite">
                 <span>Avançar</span>
                 <GrFormNext />
               </button>
