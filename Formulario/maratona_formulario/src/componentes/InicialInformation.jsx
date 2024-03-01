@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AiOutlineUser, AiOutlineCode, AiOutlineTeam } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 const InicialInformation = () => {
-  const [fimInscricao] = useState(false)
+  const [fimInscricao] = useState(true)
   return (
     <div>
       {fimInscricao? (
